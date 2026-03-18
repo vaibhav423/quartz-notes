@@ -25,15 +25,7 @@ now increasing n will increase the size of range , hence 1/n → 0
 the valid range of r for all pairs (k,n)
 is $0 \le r \le n-1$ 
 ## problem (sum using vandermonde or integration)
-
-Let 
-$$
-\alpha=\sum_\limits{k=0}^n\left(\frac{\left({ }^n C_k\right)^2}{k+1}\right)
-$$ 
-and 
-$\beta=\sum_\limits{k=0}^{n-1}\left(\frac{{ }^n C_k{ }^n C_{k+1}}{k+2}\right)$ 
-
-If $5 \alpha=6 \beta$, then $n$ equals _______.
+Let $$\alpha=\sum_\limits{k=0}^n\left(\frac{\left({ }^n C_k\right)^2}{k+1}\right)$$ and $$\beta=\sum_\limits{k=0}^{n-1}\left(\frac{{ }^n C_k{ }^n C_{k+1}}{k+2}\right)$$ If $$5 \alpha=6 \beta$$, then $$n$$ equals _______.
 
 [[Binomial#5 Vandermonde Identity (imp)]]
 use vandermonde identity or
@@ -47,14 +39,12 @@ In the expansion of $$(1+x)\left(1-x^2\right)\left(1+\frac{3}{x}+\frac{3}{x^2}+\
 
 **Explanation:**
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 & (1+x)\left(1-x^2\right)\left(1+\frac{3}{x}+\frac{3}{x^2}+\frac{1}{x^3}\right)^5 \\
 & =(1+x)\left(1-x^2\right)\left(\left(1+\frac{1}{x}\right)^3\right)^5 \\
 & =\frac{(1+x)^2(1-x)(1+x)^{15}}{x^{15}} \\
 & =\frac{(1+x)^{17}-x(1+x)^{17}}{x^{15}}
-\end{aligned}
-$$
+\end{aligned}$$
 
 $$=\operatorname{coeff}\left(\mathrm{x}^3\right)$$ in the expansion $$\approx \operatorname{coeff}\left(\mathrm{x}^{18}\right)$$ in
 
