@@ -1,0 +1,12 @@
+| Feature | Legacy BIOS (Basic Input/Output System) | Modern UEFI (Unified Extensible Firmware Interface) |
+| :--- | :--- | :--- |
+| **Age / Era** | The standard from the 1980s until the late 2000s. | The modern standard, widely adopted from ~2010 onwards. |
+| **Booting Method** | **Sector-based.** Reads the first 512-byte sector of a disk (the **MBR**) and executes whatever code it finds there. | **File-based.** Loads and executes a specific **`.efi` file** from a dedicated partition (the **ESP**). |
+| **Partitioning Scheme**| Natively designed for the **MBR** (Master Boot Record) partition scheme. | Natively designed for the **GPT** (GUID Partition Table) partition scheme. |
+| **Disk Size Limit** | Cannot boot from drives larger than **2 Terabytes (TB)** due to the limitations of the MBR scheme. | Supports drives up to **9.4 Zettabytes** (practically unlimited) due to the GPT scheme. |
+| **User Interface** | Typically a text-based, blue-and-white screen with no mouse support. Navigation is by keyboard only. | A graphical, mouse-driven interface with icons, tabs, and often multilingual support. |
+| **Security** | **No built-in security.** Susceptible to bootkit malware that can load before the operating system. | **Secure Boot.** A protocol that ensures only cryptographically signed and trusted bootloaders can be executed, preventing boot-level malware. |
+| **Performance** | **Slower boot.** Initializes hardware sequentially, one device at a time. | **Faster boot.** Can initialize hardware in parallel and has a more optimized startup process. |
+| **Architecture** | Runs in **16-bit processor mode** with limited access to system RAM (only 1 MB). | Runs in **32-bit or 64-bit processor mode**, allowing it to access all system RAM and run more complex applications. |
+| **Networking** | **No networking capability.** It is completely offline until the OS loads its own network drivers. | **Can have a built-in network stack.** This allows for pre-boot features like remote diagnostics, network-based OS installation (PXE), and internet access from the firmware itself. |
+| **Extensibility** | **Monolithic.** The entire BIOS is a single block of code with fixed functionality. | **Modular.** Can load its own drivers for new hardware or filesystems from the ESP, making it much more extensible. |

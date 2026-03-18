@@ -1,0 +1,13 @@
+ this command mount on sdcard!!!!????
+
+
+ su --mount-master -c "PATH=$PATH:/data/data/com.termux/files/usr/bin \
+/data/data/com.termux/files/usr/bin/rclone mount ix:fire/Requable /sdcard/gdriveix \
+--config /data/data/com.termux/files/home/.config/rclone/rclone.conf \
+--cache-dir /data/data/com.termux/files/home/.cache/rclone \
+--vfs-cache-mode full \
+--vfs-cache-max-size 10G \
+--allow-other \
+--log-file /data/data/com.termux/files/home/rclone.log \
+--log-level DEBUG \
+--daemon"

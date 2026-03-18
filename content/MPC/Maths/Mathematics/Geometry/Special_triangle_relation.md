@@ -1,0 +1,1 @@
+![[Adobe Scan 10 Jun 2025_1.jpg]]

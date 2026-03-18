@@ -1,0 +1,1 @@
+![[Integral Calculus for JEE by Vinay Kumar.pdf.37.jpg]]

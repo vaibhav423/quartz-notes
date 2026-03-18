@@ -1,0 +1,8 @@
+views:
+  - type: table
+    name: Table
+    groupBy:
+      property: people
+      direction: ASC
+    sort: []
+    limit: 10

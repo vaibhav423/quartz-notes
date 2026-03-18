@@ -1,0 +1,615 @@
+package com.srichaitanya.android.network;
+
+import com.google.gson.JsonObject;
+import com.srichaitanya.android.Parent.model.AboutUsResponseModel;
+import com.srichaitanya.android.Parent.model.AcademicModel;
+import com.srichaitanya.android.Parent.model.AcademicYearListModel;
+import com.srichaitanya.android.Parent.model.AddChildModelClass;
+import com.srichaitanya.android.Parent.model.AdmissionAmountResponseModel;
+import com.srichaitanya.android.Parent.model.AdmissionFormResponseModel;
+import com.srichaitanya.android.Parent.model.AdoptionStudentsListModel;
+import com.srichaitanya.android.Parent.model.AnnouncementParentModel;
+import com.srichaitanya.android.Parent.model.ApiResponse;
+import com.srichaitanya.android.Parent.model.AppPopupResponse;
+import com.srichaitanya.android.Parent.model.ApplyLeaveModel;
+import com.srichaitanya.android.Parent.model.AssignmentStatusModel;
+import com.srichaitanya.android.Parent.model.BaseResponse;
+import com.srichaitanya.android.Parent.model.BookReceiptDownloadModel;
+import com.srichaitanya.android.Parent.model.BookSalesListModel;
+import com.srichaitanya.android.Parent.model.CalculatePriceModel;
+import com.srichaitanya.android.Parent.model.CalculateUniformPriceModel;
+import com.srichaitanya.android.Parent.model.CatogoryIDModel;
+import com.srichaitanya.android.Parent.model.ChangeLanguageModel;
+import com.srichaitanya.android.Parent.model.ChildExamresultModel;
+import com.srichaitanya.android.Parent.model.ChildTimetableModel;
+import com.srichaitanya.android.Parent.model.ClassResponseModel;
+import com.srichaitanya.android.Parent.model.ConversionModel;
+import com.srichaitanya.android.Parent.model.CountModelClass;
+import com.srichaitanya.android.Parent.model.ExamModelClass;
+import com.srichaitanya.android.Parent.model.FeeDetailsModelClass;
+import com.srichaitanya.android.Parent.model.FeeFirstScreenModel;
+import com.srichaitanya.android.Parent.model.FeeTypeSubmitResponse;
+import com.srichaitanya.android.Parent.model.FeedBackResponseModel;
+import com.srichaitanya.android.Parent.model.FeedbackQuestionsModel;
+import com.srichaitanya.android.Parent.model.HolidayListModel;
+import com.srichaitanya.android.Parent.model.LeaveListModel;
+import com.srichaitanya.android.Parent.model.LoginModelClass;
+import com.srichaitanya.android.Parent.model.OrientationResponseModel;
+import com.srichaitanya.android.Parent.model.ParentAnnouncementChange;
+import com.srichaitanya.android.Parent.model.ParentMyDiaryModel;
+import com.srichaitanya.android.Parent.model.ParentNotificationModel;
+import com.srichaitanya.android.Parent.model.PayBookFeeModel;
+import com.srichaitanya.android.Parent.model.PayUniformFeeModel;
+import com.srichaitanya.android.Parent.model.PaymentDownloadModel;
+import com.srichaitanya.android.Parent.model.PaymentGatewayModel;
+import com.srichaitanya.android.Parent.model.PdfModelClass;
+import com.srichaitanya.android.Parent.model.PincodeListsModel;
+import com.srichaitanya.android.Parent.model.PlaceOrderModel;
+import com.srichaitanya.android.Parent.model.PlaceUniformOrderModel;
+import com.srichaitanya.android.Parent.model.QueryListModelClass;
+import com.srichaitanya.android.Parent.model.QuerySubmitModelClass;
+import com.srichaitanya.android.Parent.model.QueryTypeModelClass;
+import com.srichaitanya.android.Parent.model.RegisterModelClass;
+import com.srichaitanya.android.Parent.model.RemoveChildModel;
+import com.srichaitanya.android.Parent.model.ReportCardModelClass;
+import com.srichaitanya.android.Parent.model.SchoolResponseModel;
+import com.srichaitanya.android.Parent.model.SocialMediaModel;
+import com.srichaitanya.android.Parent.model.StateCityResponseModel;
+import com.srichaitanya.android.Parent.model.StudentProfile;
+import com.srichaitanya.android.Parent.model.StudentProfileModel;
+import com.srichaitanya.android.Parent.model.StudentTypeResponseModel;
+import com.srichaitanya.android.Parent.model.SubmitAdmissionModel;
+import com.srichaitanya.android.Parent.model.SwitchChildrenModelClass;
+import com.srichaitanya.android.Parent.model.UniformSalesListModel;
+import com.srichaitanya.android.Parent.model.UploadImageModelClass;
+import com.srichaitanya.android.Parent.model.UploadedAudioModel;
+import com.srichaitanya.android.Parent.model.VersionUpdateResponseModel;
+import com.srichaitanya.android.Teacher.model.ActivityCatogoryModel;
+import com.srichaitanya.android.Teacher.model.AdoptionCallModel;
+import com.srichaitanya.android.Teacher.model.ClassListModel;
+import com.srichaitanya.android.Teacher.model.DiaryActivitySubmitModel;
+import com.srichaitanya.android.Teacher.model.LeaveStatusModel;
+import com.srichaitanya.android.Teacher.model.ManualCallLogResponse;
+import com.srichaitanya.android.Teacher.model.ParentQueriesModel;
+import com.srichaitanya.android.Teacher.model.QueryAcknowledgeModel;
+import com.srichaitanya.android.Teacher.model.QueryViewModel;
+import com.srichaitanya.android.Teacher.model.RemarkStudentAcknowledgeModel;
+import com.srichaitanya.android.Teacher.model.RemarkSubmitModel;
+import com.srichaitanya.android.Teacher.model.StudentDetailsResponse;
+import com.srichaitanya.android.Teacher.model.SubjectModelClass;
+import com.srichaitanya.android.Teacher.model.SubmitAssignmentModel;
+import com.srichaitanya.android.Teacher.model.TeacherAnnouncementChange;
+import com.srichaitanya.android.Teacher.model.TeacherAnnouncementModel;
+import com.srichaitanya.android.Teacher.model.TeacherCatogoryModelClass;
+import com.srichaitanya.android.Teacher.model.TeacherCountModel;
+import com.srichaitanya.android.Teacher.model.TeacherLoginModel;
+import com.srichaitanya.android.Teacher.model.TeacherNotificationModelClass;
+import com.srichaitanya.android.Teacher.model.TeacherProfileModel;
+import com.srichaitanya.android.Teacher.model.TeacherStudentClasssModel;
+import com.srichaitanya.android.Teacher.model.TeacherStudentLeaveListModel;
+import com.srichaitanya.android.Teacher.model.TeacherUpdateProfileModel;
+import com.srichaitanya.android.Teacher.model.TeacherWeekDayModel;
+import com.srichaitanya.android.Teacher.model.TimeTableDataModel;
+import com.srichaitanya.android.Teacher.model.UpdateAssignmentSubmitModel;
+import com.srichaitanya.android.Teacher.model.ViewActivityModel;
+import com.srichaitanya.android.Teacher.model.ViewAssignmentModel;
+import com.srichaitanya.android.Teacher.model.ViewRemarkModel;
+import com.srichaitanya.android.calendar.models.AcadamicYearsModel;
+import com.srichaitanya.android.calendar.models.Example;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
+
+public interface APIMethods {
+    @FormUrlEncoded
+    @POST("parents/apply-for-leave")
+    Call<ApplyLeaveModel> ParseApplyLeaveModel(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("users/profile")
+    Call<TeacherProfileModel> Parsegetteacherprofile(@Field("school_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @POST("users/aboutus")
+    Call<AboutUsResponseModel> aboutUs();
+
+    @FormUrlEncoded
+    @POST("users/add-device-token")
+    Call<VersionUpdateResponseModel> addDeviceToken(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("school/get-amount-api")
+    Call<AdmissionAmountResponseModel> admissionAmount(@FieldMap Map<String, String> map);
+
+    @POST("school/get-drop-downs-for-admission-form")
+    Call<AdmissionFormResponseModel> admissionDropDowns();
+
+    @FormUrlEncoded
+    @POST("users/auto-login")
+    Call<LoginModelClass> autoLogin(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("booksales/calculate-price")
+    Call<CalculatePriceModel> calculatePrice(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("uniformsales/calculate-price")
+    Call<CalculateUniformPriceModel> calculateUniformPrice(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("parents/change-leave-counter")
+    Call<LeaveListModel> changeLeaveCounter(@Field("user_id") String str, @Field("student") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/change-query-counter")
+    Call<LeaveListModel> changeQueryCounter(@Field("user_id") String str, @Field("student") String str2, @Field("category") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("feedbackquestion/checkfeed")
+    Call<BaseResponse> checkFeedBack(@Field("student_id") String str);
+
+    @FormUrlEncoded
+    @POST("school/get-cities-for-admission-form")
+    Call<StateCityResponseModel> cities(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("school/get-classes-for-admission-form")
+    Call<ClassResponseModel> classes(@FieldMap Map<String, String> map);
+
+    @POST("dropouts/save")
+    Call<BaseResponse> createDropOutReason(@Body RequestBody requestBody);
+
+    @POST("staffStudentMap/createManualCallLog")
+    Call<BaseResponse> createManualCallLog(@Body RequestBody requestBody);
+
+    @FormUrlEncoded
+    @POST("feedbackquestion/deletetempaudio")
+    Call<UploadedAudioModel> deleteAudio(@FieldMap HashMap<String, String> hashMap);
+
+    @FormUrlEncoded
+    @POST("parents/books-receipt-pdf")
+    Call<BookReceiptDownloadModel> downloadReciptApi(@Field("user_id") String str, @Field("transaction_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("feedbackquestion/feedbackdetails")
+    Call<FeedBackResponseModel> feedbackCheck(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("feedbackquestion/feedback")
+    Call<ApiResponse<FeedbackQuestionsModel>> feedbackQuestion(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("achievement/achievement")
+    Call<HolidayListModel> fetchChildAchievementData(@Field("admission_no") String str, @Field("param_school") String str2, @Field("current_date") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("holiday/holiday")
+    Call<HolidayListModel> fetchHolidayData(@Field("admission_no") String str, @Field("param_school") String str2, @Field("current_date") String str3, @Header("access-token") String str4);
+
+    @GET("staffStudentMap/fetchManualCallLogs")
+    Call<ManualCallLogResponse> fetchManualCallLogs(@Query("staffId") String str, @Query("studentId") String str2);
+
+    @FormUrlEncoded
+    @POST("booksales/fetch-pincodes")
+    Call<PincodeListsModel> fetchPincodeData(@Field("user_id") String str, @Field("state_id") String str2, @Header("access-token") String str3);
+
+    @GET("staffStudentMap/fetchStudents")
+    Call<AdoptionStudentsListModel> getAdoptionList(@Query("emp_id") String str);
+
+    @FormUrlEncoded
+    @POST("app-popup-api")
+    Call<AppPopupResponse> getAppPopup(@Field("student_id") String str);
+
+    @FormUrlEncoded
+    @POST("booksales/list")
+    Call<BookSalesListModel> getBookListData(@Field("admission_no") String str, @Field("user_id") String str2, @Field("academic_year_id") String str3, @Field("student_id") String str4, @Field("is_advance_class") String str5, @Header("access-token") String str6);
+
+    @GET("staffStudentMap/initiateStaffStudentCall")
+    Call<AdoptionCallModel> getCallAdoption(@Query("emp_id") String str, @Query("admission_no") String str2);
+
+    @GET("dropouts/remarks")
+    Call<JsonObject> getDropoutReasons();
+
+    @FormUrlEncoded
+    @POST("parents/fetch-examfeelist")
+    Call<ResponseBody> getFeeDetails(@Field("user_id") String str, @Field("admission_no") String str2, @Field("fee_type") String str3, @Field("student_id") String str4, @Field("academic_year_id") String str5, @Header("access-token") String str6);
+
+    @FormUrlEncoded
+    @POST("parents/pay-examfee")
+    Call<FeeTypeSubmitResponse> getPayLink(@Field("student_id") String str, @Field("user_id") String str2, @Field("amount") String str3, @Field("fee_type") String str4, @Field("academic_year_id") String str5, @Field("gateway") String str6, @Field("ip_address") String str7, @Field("admission_no") String str8, @Field("exam_id") String str9, @Field("exam_name") String str10, @Header("access-token") String str11);
+
+    @FormUrlEncoded
+    @POST("payment-api/get-payment-list")
+    Call<PaymentGatewayModel> getPaymentGateway(@Field("user_id") String str, @Field("varna_school_id") String str2, @Field("school_id") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("parents/books-receipt-pdf")
+    Call<ResponseBody> getReceipt(@Field("user_id") String str, @Field("transaction_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/student-exam-schedule")
+    Call<AnnouncementParentModel> getScheduledExam(@Field("student") String str, @Field("user_id") String str2);
+
+    @FormUrlEncoded
+    @POST("parents/attendance-data")
+    Call<Example> getStudentAttendance(@FieldMap Map<String, String> map);
+
+    @GET("dashboard/StudentPurchaseFlags")
+    Call<StudentDetailsResponse> getStudentDetails(@Query("admission_no") String str);
+
+    @GET("school/get-conversion-types")
+    Call<ConversionModel> getType();
+
+    @GET("parents/get-examfeetypes")
+    Call<ResponseBody> getTypeFee();
+
+    @FormUrlEncoded
+    @POST("uniformsales/list")
+    Call<UniformSalesListModel> getUniformData(@Field("admission_no") String str, @Field("user_id") String str2, @Field("academic_year_id") String str3, @Field("student_id") String str4, @Header("access-token") String str5);
+
+    @FormUrlEncoded
+    @POST("parents/uniform-receipt-pdf")
+    Call<ResponseBody> getUniformReceipt(@Field("user_id") String str, @Field("transaction_id") String str2, @Header("access-token") String str3);
+
+    @GET("parents/get-cur-academicyear-months")
+    Call<AcadamicYearsModel> getYearList();
+
+    @FormUrlEncoded
+    @POST("parents/student-academic-year")
+    Call<AcademicModel> getacademicapi(@Field("student_id") int i, @Field("user_id") String str, @Header("access-token") String str2);
+
+    @FormUrlEncoded
+    @POST("school/academic-year-name-list-for-fee-type")
+    Call<AcademicYearListModel> getacademicapiio(@Field("student_id") int i, @Field("user_id") String str, @Field("fee_type") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/student-list-activities")
+    Call<RemarkStudentAcknowledgeModel> getactivityacknowledgeapi(@Field("user_id") String str, @Field("activity_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/announcement-parents")
+    Call<AnnouncementParentModel> getannouncementapi(@Field("student") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/student-list-assignments")
+    Call<RemarkStudentAcknowledgeModel> getassignmentstudentapi(@Field("user_id") String str, @Field("assignment_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/child-categories")
+    Call<CatogoryIDModel> getcatogories(@Field("category_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/remarks-category")
+    Call<TeacherCatogoryModelClass> getcatogoryapi(@Field("user_id") String str, @Field("type") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/get-school-time-table")
+    Call<ChildTimetableModel> getchildtimetableapi(@Field("user_id") String str, @Field("student") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/school-classes-class-teacher")
+    Call<ClassListModel> getclasslistapi(@Field("user_id") String str, @Field("school_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/counters-on-profile")
+    Call<CountModelClass> getcountapi(@Field("user_id") String str, @Field("student") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/notification-counter")
+    Call<TeacherCountModel> getcountapii(@Field("user_id") String str, @Field("school_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/remarks-category")
+    Call<ActivityCatogoryModel> getdiaryactivitycatogory(@Field("user_id") String str, @Field("type") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/remarks-category")
+    Call<TeacherCatogoryModelClass> getdiaryactivitycatogory1(@Field("user_id") String str, @Field("type") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("school/get-student-exam-list")
+    Call<ExamModelClass> getexamapi(@Field("admission_no") String str, @Field("user_id") String str2, @Field("academic_year_id") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("school/get-student-exam-list")
+    Call<ExamModelClass> getexamppapi(@Field("admission_no") String str, @Field("user_id") String str2, @Field("academic_year_id") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("school/get-student-exam-result")
+    Call<ChildExamresultModel> getexamresultapi(@Field("admission_no") String str, @Field("user_id") String str2, @Field("academic_year_id") String str3, @Field("exam_id") String str4, @Header("access-token") String str5);
+
+    @FormUrlEncoded
+    @POST("school/get-student-fees-second-screen")
+    Call<FeeDetailsModelClass> getfeedetailsapi(@Field("student_id") String str, @Field("user_id") String str2, @Header("access-token") String str3, @Field("academic_year_id") String str4, @Field("fee_type") String str5);
+
+    @FormUrlEncoded
+    @POST("school/get-student-fees-first-screen")
+    Call<FeeFirstScreenModel> getfeedetailsapii(@Field("student_id") String str, @Field("user_id") String str2, @Header("access-token") String str3, @Field("academic_year_id") String str4);
+
+    @FormUrlEncoded
+    @POST("parents/parent-student-diary")
+    Call<ParentMyDiaryModel> getparentdiarylist(@Field("admission_no") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/query-list")
+    Call<ParentQueriesModel> getparentqueriesapi(@Field("school") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/query-log-list")
+    Call<QueryTypeModelClass> getqueryapi(@Field("student") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/query-log-details")
+    Call<QueryListModelClass> getqueryviewlistapi(@Field("student") String str, @Field("category") String str2, @Field("user_id") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("users/student-list-remarks")
+    Call<RemarkStudentAcknowledgeModel> getremarkstudentapi(@Field("user_id") String str, @Field("remark_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/diary-remarks")
+    Call<ViewRemarkModel> getremarkviewapi(@Field("school") int i, @Field("user_id") String str, @Header("access-token") String str2);
+
+    @FormUrlEncoded
+    @POST("school/get-student-report-list")
+    Call<ReportCardModelClass> getreportcardapi(@Field("admission_no") String str, @Field("user_id") String str2, @Field("academic_year_id") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("users/diary-assignment")
+    Call<ViewAssignmentModel> getstudentassignmentapi(@Field("school") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/notification-list")
+    Call<ParentNotificationModel> getstudentnotification(@Field("admission_no") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/class-subjects-for-teacher")
+    Call<SubjectModelClass> getsubjectapilist(@Field("user_id") String str, @Field("school_class") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/get-children")
+    Call<SwitchChildrenModelClass> getswitchchildapii(@Field("student_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/announcement-teacher")
+    Call<TeacherAnnouncementModel> getteacherannounceapi(@Field("school_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/notification-list")
+    Call<TeacherNotificationModelClass> getteachernotificationapi(@Field("school_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/class-students")
+    Call<TeacherStudentClasssModel> getteacherstudentapi(@Field("school_class") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/leave-list-for-teacher")
+    Call<TeacherStudentLeaveListModel> getteacherstudentleavelistapi(@Field("school") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/get-teacher-time-table-by-day")
+    Call<TimeTableDataModel> gettimetableapi(@Field("week_day") String str, @Field("school") String str2, @Field("user_id") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("users/school-activities")
+    Call<ViewActivityModel> getviewactivitiesapi(@Field("school") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/get-week-days")
+    Call<TeacherWeekDayModel> getweekdayapi(@Field("user_id") String str, @Header("access-token") String str2);
+
+    @GET("feedbackquestion/languages")
+    Call<ApiResponse<ChangeLanguageModel>> languageType();
+
+    @FormUrlEncoded
+    @POST("school/receipt-pdf")
+    Call<PaymentDownloadModel> newAdmissionReceipt(@Field("transaction_id") String str);
+
+    @FormUrlEncoded
+    @POST("school/get-orientations-for-admission-form")
+    Call<OrientationResponseModel> orientations(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("payment-api/pay-fee")
+    Call<FeeTypeSubmitResponse> parentfeesubmit(@Field("student") int i, @Field("user_id") String str, @Field("academic_year_id") String str2, @Field("ip_address") String str3, @Field("gateway") String str4, @Field("fee_type") String str5, @Field("amount_initiate") String str6, @Field("school_id") String str7, @Header("access-token") String str8);
+
+    @FormUrlEncoded
+    @POST("users/acknoledge-parent-query")
+    Call<QueryAcknowledgeModel> parseacknowledgequerysubmit(@Field("user_id") String str, @Field("query_id") String str2, @Field("question") String str3, @Header("access-token") String str4, @Field("answer") String str5);
+
+    @FormUrlEncoded
+    @POST("parents/update-school-activity-status")
+    Call<AssignmentStatusModel> parseactivitystatusapi(@Field("stud_activity_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/change-announcement-counter")
+    Call<ParentAnnouncementChange> parseannouncementapi(@Field("student") String str, @Field("user_id") String str2, @Field("aid") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("users/change-announcement-counter")
+    Call<TeacherAnnouncementChange> parseannouncementapii(@Field("user_id") String str, @Field("aid") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/update-assignment-status")
+    Call<AssignmentStatusModel> parseassignmentstatusapi(@Field("stud_assi_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @POST("users/create-assignment-new")
+    @Multipart
+    Call<SubmitAssignmentModel> parseassignmentsubmit(@Part("user_id") String str, @Part("school_class") String str2, @Part("subject") String str3, @Part("title") String str4, @Part("start_date") String str5, @Part("end_date") String str6, @Part MultipartBody.Part part, @Part("student[]") List<String> list, @Header("access-token") String str7);
+
+    @POST("users/create-assignment-new")
+    @Multipart
+    Call<SubmitAssignmentModel> parseassignmentsubmitapi(@Part("user_id") RequestBody requestBody, @Part("subject") RequestBody requestBody2, @Part("title") RequestBody requestBody3, @Part("start_date") RequestBody requestBody4, @Part("end_date") RequestBody requestBody5, @Part("school_class") RequestBody requestBody6, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @POST("users/create-assignment-new")
+    @Multipart
+    Call<SubmitAssignmentModel> parseassignmentsubmitapiWithImage(@Part("user_id") RequestBody requestBody, @Part("subject") RequestBody requestBody2, @Part("title") RequestBody requestBody3, @Part("start_date") RequestBody requestBody4, @Part("end_date") RequestBody requestBody5, @Part("school_class") RequestBody requestBody6, @Part MultipartBody.Part part, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("parents/add-child")
+    Call<AddChildModelClass> parsechildapi(@Field("student_id") String str, @Field("user_id") String str2, @Field("admission_no") String str3, @Field("dob") String str4, @Header("access-token") String str5);
+
+    @FormUrlEncoded
+    @POST("parents/pay-fee")
+    Call<FeeTypeSubmitResponse> parsefeesubmit(@Field("student") int i, @Field("user_id") String str, @Field("academic_year_id") String str2, @Field("ip_address") String str3, @Field("gateway") String str4, @Field("fee_type") String str5, @Field("amount_initiate") String str6, @Field("conversion_type") String str7, @Header("access-token") String str8);
+
+    @FormUrlEncoded
+    @POST("parents/student-profile")
+    Call<StudentProfileModel> parsegetprofile(@Field("user_id") String str, @Field("student_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/student-profile")
+    Call<StudentProfile> parsegetprofileapi(@Field("user_id") String str, @Field("student_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/apply-for-leave")
+    Call<ApplyLeaveModel> parseleaveapply(@Field("start_date") String str, @Field("end_date") String str2, @Field("application_for") String str3, @Field("reason") String str4, @Field("added_by") String str5, @Field("student") String str6, @Field("user_id") String str7, @Header("access-token") String str8);
+
+    @FormUrlEncoded
+    @POST("parents/leave-list-for-parent")
+    Call<LeaveListModel> parseleavelist(@Field("admission_no") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("users/change-leave-status")
+    Call<LeaveStatusModel> parseleavestatusapi(@Field("user_id") String str, @Field("leave_id") String str2, @Field("status") String str3, @Header("access-token") String str4);
+
+    @FormUrlEncoded
+    @POST("users/login-new")
+    Call<LoginModelClass> parseloginsubmitmodel(@Field("admission_no") String str, @Field("password") String str2, @Field("role") String str3);
+
+    @FormUrlEncoded
+    @POST("users/login-new")
+    Call<LoginModelClass> parseloginsubmitmodel(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("parents/receipt-pdf")
+    Call<PaymentDownloadModel> parsepaymentapi(@Field("user_id") String str, @Field("transaction_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("parents/first-time-set-password")
+    Call<RegisterModelClass> parseregiapi(@Field("admission_no") String str, @Field("dob") String str2, @Field("confirm_password") String str3, @Field("password") String str4, @Field("role") String str5);
+
+    @FormUrlEncoded
+    @POST("parents/update-remark-status")
+    Call<AssignmentStatusModel> parseremarkstatusapi(@Field("stud_remark_id") String str, @Field("user_id") String str2, @Header("access-token") String str3);
+
+    @POST("users/create-diary-remarks")
+    @Multipart
+    Call<RemarkSubmitModel> parseremarksubmitapi(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("category") RequestBody requestBody3, @Part("scale") RequestBody requestBody4, @Part("message") RequestBody requestBody5, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @POST("users/create-diary-remarks")
+    @Multipart
+    Call<RemarkSubmitModel> parseremarksubmitapiWithImage(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("category") RequestBody requestBody3, @Part("scale") RequestBody requestBody4, @Part("message") RequestBody requestBody5, @Part MultipartBody.Part part, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("parents/remove-child")
+    Call<RemoveChildModel> parseremovechild(@Field("student_id") String str, @Field("user_id") String str2, @Field("child_id") String str3, @Header("access-token") String str4);
+
+    @POST("users/create-school-activities-new")
+    @Multipart
+    Call<DiaryActivitySubmitModel> parsesubmitactivityapi(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("category") RequestBody requestBody3, @Part("start_date") RequestBody requestBody4, @Part("description") RequestBody requestBody5, @Part("end_date") RequestBody requestBody6, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @POST("users/create-school-activities-new")
+    @Multipart
+    Call<DiaryActivitySubmitModel> parsesubmitactivityapiWithImage(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("category") RequestBody requestBody3, @Part("start_date") RequestBody requestBody4, @Part("description") RequestBody requestBody5, @Part("end_date") RequestBody requestBody6, @Part MultipartBody.Part part, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("parents/submit-parent-query")
+    Call<QuerySubmitModelClass> parsesubmitquery(@Field("student") String str, @Field("user_id") String str2, @Field("category") String str3, @Field("question") String str4, @Field("admission_no") String str5, @Header("access-token") String str6);
+
+    @FormUrlEncoded
+    @POST("users/login-new")
+    Call<TeacherLoginModel> parseteacherloginsubmitmodel(@Field("username") String str, @Field("password") String str2, @Field("role") String str3);
+
+    @POST("users/update-profile")
+    @Multipart
+    Call<TeacherUpdateProfileModel> parseteacherupdateprofile(@Part("user_id") RequestBody requestBody, @Part MultipartBody.Part part, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("users/update-assignment-new")
+    Call<SubmitAssignmentModel> parseupdateassignment(@Field("user_id") String str, @Field("school_class") String str2, @Field("subject") String str3, @Field("title") String str4, @Field("start_date") String str5, @Field("end_date") String str6, @Field("attachment") String str7, @Field("id") int i, @Field("student") String str8, @Header("access-token") String str9);
+
+    @POST("users/update-assignment-new")
+    @Multipart
+    Call<UpdateAssignmentSubmitModel> parseupdateassignmentapii(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("subject") RequestBody requestBody3, @Part("title") RequestBody requestBody4, @Part("start_date") RequestBody requestBody5, @Part("end_date") RequestBody requestBody6, @Part MultipartBody.Part part, @Part("id") RequestBody requestBody7, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @POST("users/update-school-activities-new")
+    @Multipart
+    Call<DiaryActivitySubmitModel> parseupdatediaryactivityapii(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("category") RequestBody requestBody3, @Part("description") RequestBody requestBody4, @Part("start_date") RequestBody requestBody5, @Part("end_date") RequestBody requestBody6, @Part("id") RequestBody requestBody7, @Part("student[]") List<RequestBody> list, @Part MultipartBody.Part part, @Header("access-token") String str);
+
+    @POST("parents/update-student")
+    @Multipart
+    Call<UploadImageModelClass> parseupdateimage(@Part("user_id") RequestBody requestBody, @Part("student_id") RequestBody requestBody2, @Part MultipartBody.Part part, @Header("access-token") String str);
+
+    @POST("users/update-remark")
+    @Multipart
+    Call<RemarkSubmitModel> parseupdateremarkapii(@Part("user_id") RequestBody requestBody, @Part("school_class") RequestBody requestBody2, @Part("id") RequestBody requestBody3, @Part("category") RequestBody requestBody4, @Part("scale") RequestBody requestBody5, @Part("message") RequestBody requestBody6, @Part MultipartBody.Part part, @Part("student[]") List<RequestBody> list, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("booksales/pay-book-fee")
+    Call<PayBookFeeModel> payBookFee(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("uniformsales/pay-uniform-fee")
+    Call<PayUniformFeeModel> payUniformFee(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("school/get-student-report-file")
+    Call<PdfModelClass> pdfgetview(@Field("user_id") String str, @Field("admission_no") String str2, @Field("academic_year_id") String str3, @Field("progress_report_id") String str4, @Header("access-token") String str5);
+
+    @FormUrlEncoded
+    @POST("booksales/order-books")
+    Call<PlaceOrderModel> placeBookOrders(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("uniformsales/order-uniform")
+    Call<PlaceUniformOrderModel> placeUniformOrder(@FieldMap Map<String, String> map, @Header("access-token") String str);
+
+    @FormUrlEncoded
+    @POST("users/query-details")
+    Call<QueryViewModel> queryviewapi(@Field("user_id") String str, @Field("query_id") String str2, @Header("access-token") String str3);
+
+    @FormUrlEncoded
+    @POST("school/get-schools-for-admission-form")
+    Call<SchoolResponseModel> schools(@FieldMap Map<String, String> map);
+
+    @POST("feedbackquestion/inserttempaudio")
+    @Multipart
+    Call<UploadedAudioModel> sendAudioFile(@Part MultipartBody.Part part, @Part("sk_qa_id") RequestBody requestBody, @Part("ref_id") RequestBody requestBody2, @Part("student_id") RequestBody requestBody3);
+
+    @POST("feedbackquestion/insertfeedback")
+    @Multipart
+    Call<ResponseBody> sendFeedback(@Part("user_id") RequestBody requestBody, @Part("student_id") RequestBody requestBody2, @Part("admission_no") RequestBody requestBody3, @Part("language_id") RequestBody requestBody4, @Part("any_queries") RequestBody requestBody5, @Part("ref_id") RequestBody requestBody6, @Part("feedback_data") RequestBody requestBody7, @Part MultipartBody.Part part, @Part MultipartBody.Part part2, @Header("access-token") String str);
+
+    @GET("settings/social")
+    Call<ApiResponse<List<SocialMediaModel>>> socialLinks();
+
+    @FormUrlEncoded
+    @POST("school/get-states-for-admission-form")
+    Call<StateCityResponseModel> states(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("school/get-student-type-for-admission-form")
+    Call<StudentTypeResponseModel> studentTypes(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("school/submit-admission")
+    Call<SubmitAdmissionModel> submitAdmission(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("users/version")
+    Call<VersionUpdateResponseModel> versionUpdate(@Field("current_version") int i);
+}

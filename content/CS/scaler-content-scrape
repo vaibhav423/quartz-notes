@@ -1,0 +1,100 @@
+the cookies for all request is in : ~/Downloads/cookies-www-scaler-com.txt
+an example for headers for any request to be made is 
+curl -L -b ~/Downloads/cookies-www-scaler-com.txt \
+     -A "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0" \
+     -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+     -H "Accept-Language: en-US,en;q=0.5" \
+     -H "Upgrade-Insecure-Requests: 1" \
+     -H "Sec-Fetch-Dest: document" \
+     -H "Sec-Fetch-Mode: navigate" \
+     -H "Sec-Fetch-Site: same-origin" \
+     "https://www.scaler.com/api/v2/classroom/472800/session" > k.json 
+
+
+
+1.)
+
+to get : all subjects do https://www.scaler.com/api/v3/super_batches/modules-details?trimester=2
+this will give a json , u need to extract the id and use id for next request
+then loop through {data : [ {id:"415"}, {} ,....] }
+
+2.)
+
+
+to get chapters of given subject id put it in place of [academy_module_id]=id and do 
+https://www.scaler.com/mentee-academy-topics/classes?filter[academy_module_id]=455&filter[status][]=active&filter[status][]=locked&filter[status][]=repeat&filter[status][]=bonus&filter[category]=core&filter[lecture_bucket][]=Optional&filter[lecture_bucket][]=Remedial&&sort=date_of_topic&include[]=super_batch_academy_topic.academy_topic&include[]=super_batch_academy_topic&include[]=super_batch_academy_topic.academy_topic.academy_module
+u will get a json again and the id for a chapter of given subject , id will be inside the json 
+
+{data : [ {id:"31283::id "}, {} ,....] }
+
+3.)
+
+to get link of notes of a single chapter do with id from previous 
+
+ curl -L -b ~/Downloads/cookies-www-scaler-com.txt \
+     -A "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0" \
+     -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+     -H "Accept-Language: en-US,en;q=0.5" \
+     -H "Upgrade-Insecure-Requests: 1" \
+     -H "Sec-Fetch-Dest: document" \
+     -H "Sec-Fetch-Mode: navigate" \
+     -H "Sec-Fetch-Site: same-origin" \
+     "https://www.scaler.com/api/v2/classroom/472800/session" > k.json 
+
+path to link 
+data → attributes → batch_lesson → lecture_notes → data → 0 → link
+
+
+
+for videos:
+
+from session link in json https://www.scaler.com/api/v2/classroom/476282/session
+"session_link":"/meetings/i/class-6-dom-project-4-task-management-app-4/"
+
+and go to this https://www.scaler.com/meetings/class-6-dom-project-4-task-management-app-4/recordings
+use json obtained from above:
+{"messages":[{"id":62442332,"body":"https://developer.mozilla.org/en-US/docs/Web/API","user_id":2061828,"to_id":null,"chat_room_id":2142894,"created_at":"2025-12-02T09:45:37.177Z","updated_at":"2025-12-02T09:48:04.842Z","message_type":"text"},{"id":62442433,"body":"jo147\\","user_id":7504729,"to_id":null,"chat_room_id":2142894,"created_at":"2025-12-02T10:35:49.036Z","updated_at":"2025-12-02T10:36:04.179Z","message_type":"text"},{"id":62442507,"body":",4aa","user_id":7504776,"to_id":null,"chat_room_id":2142894,"created_at":"2025-12-02T11:02:44.506Z","updated_at":"2025-12-02T11:03:05.339Z","message_type":"text"}],"participants":[{"id":130362402,"name":"Mrinal Bhattacharya","user_id":2061828,"avatar":"https://s3-ap-southeast-1.amazonaws.com/scaler-production-new/users/avatars/002/061/828/medium/unnamed.jpg","role":"super_host","is_unmuted":false,"is_chat_disabled":false,"banned":false,"ghost":false,"is_bot":false},{"id":130363274,"name":"Priyansh Khanna","user_id":7504729,"avatar":"https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg","role":"audience","is_unmuted":false,"is_chat_disabled":false,"banned":false,"ghost":false,"is_bot":false},{"id":130363150,"name":"Arpit Kakkar","user_id":7504776,"avatar":"https://ibassets.s3.amazonaws.com/static-assets/new_default_pp.svg","role":"audience","is_unmuted":false,"is_chat_disabled":false,"banned":false,"ghost":false,"is_bot":false}],"recordings":[{"id":1011563,"duration":5673,"start_time":"2025-12-02T09:29:45.000Z","end_time":"2025-12-02T11:04:18.000Z","url":"/videos/757e420b52c746ca988ae9a352059044/master.m3u8","resume_at":5.78821}],"bookmarks":[],"pinned":[],"notice_board":[]}
+and take url "url":"/videos/757e420b52c746ca988ae9a352059044/master.m3u8", 
+
+and download : 
+https://www.scaler.com/videos/757e420b52c746ca988ae9a352059044/stream_1.m3u8 
+
+fallback to this if not found 
+https://www.scaler.com/videos/757e420b52c746ca988ae9a352059044/stream_0.m3u8
+
+
+
+
+
+
+
+to get user id go to data:id: then do: add 1 to starting to get uid 
+
+curl 'https://www.scaler.com/analytics/' \
+  --compressed \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0' \
+  -H 'Accept: application/json' \
+  -H 'Accept-Language: en-US,en;q=0.5' \
+  -H 'Accept-Encoding: gzip, deflate, br, zstd' \
+  -H 'Referer: https://www.scaler.com/academy/mentee-dashboard/class/482413/session?joinSession=1&utm_medium=direct&utm_source=none&utm_content=/users/sign_in/' \
+  -H 'Content-Type: application/json' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'X-Accept-Flash: true' \
+  -H 'App-Name: desktop' \
+  -H 'X-CSRF-Token: NA6D96AH5aMc0IDqzlZqL3xr/4qTYNFOq2gAbrKJjFvFJgpXQnxCg7OV7ioYpB7WdVuc0NL3d0Sqtqw4TrZ2SA==' \
+  -H 'Connection: keep-alive' \
+  -H 'Cookie: ahoy_visitor=caa4e02f-3c50-46de-b91c-26d697034fbf; ahoy_visit=6d1ccbe7-e20e-48af-a223-3d712b9ce472; _scaler_session=NlBPZ0FhQjZwUE5MS3pPaCtzM1grdDNhY2dOWmRlSzdobEN5Z3gzN1dOemx0aGtpWlpYa29QaEMrN1J3dVJJZExQS2ZVeUVoSjE2dFpPWmw4dmYwcHp1dVo1Mi9XNUg5QmtpNWhGSXZOdGNFOHBGVTBkZVJLbXVHTkZCSzhNNVZlbEpTNTZUSkVqY1ZadVhFaWZkcXg4VThxUkhjSlRLU0swVHdvRmZPa2xoVHM4T3RxVXZWQ1FNbUFqWkhVZkU3ZDF5M2VXVTZja3JuM3BuSm44bGs0bklHblFnbjg4VXpVQjNFRUlub0NlU2VVa3hkSTE0NWlqK2ZuZnBEbzJQSS8yNG15Q3RVZE9kOHlOYmtHd0NVMUlqSzB0MEtVei94bTdVVVQ5THBxNmNnNUhhSEpGY2V6c0tyMVpjRm9yaEFYTGczS2Frd3NmUUxpYjBWVi81bTdRZ3FZdU5sL2d1ZUJYUlZ0QTV6OXQ5NzhqQ3drdzlPQjdKQ1B4L3NXZ05xY2IxUEJTUkdIUHZpYnYvS1J6OHNFUVhlSWRZOUU0dGIrNlU4ZllIc3RySE52d3VaUEdjbVMzOE0vNko3SGw5Z3NzemhnZTQwcmpIRTR0UEdlV1poelBDUmRXdXZmdm54RHRWU2pxaHF4a0NLc1dMaDZHbmFVSDM2MkhDclIraUt6RjBvZTBSbTgyMUNxY3hPZGJDcU9MRWZZT3NSMXYrdDBDTzdpa1YrYzJRQjN5UHAwNXNpZG9LTGxCQ09CemNxZUR2RjdQcTY4RXh6UXVSOFhXeHljUDg0dzQwMG8xQTRVZCszZnJYUmNOcFNlUm45YWpBVFRSbjJmWmRZV21vUS0tbVZublF2eVdyWTA5UUtqeXB1ZzA0dz09--0ce03bda05e391928ec83e6a5d57c4da424da3ac; rubyenv_ts=2.5.9_2025-12-17T10%3A55%3A35%2B00%3A00; XSRF-TOKEN=UtrGn7KFik0G6XvkHixcxy%2FY%2Br3p55n3Iwm7zuZVdsCj8k8%2FUP4tbamsFSTI3ig%2BJuiZ56hwP%2F0i1xeYGmqM0w%3D%3D; _ga_53S71ZZG1X=GS2.1.s1765968579$o1$g1$t1765968936$j60$l0$h1066431131; _ga_BD7F6ECS9Z=GS2.1.s1765967512$o3$g1$t1765968936$j60$l0$h1246703422; experiments=growth-tech_free-product_fp-rcb%3Adefault_rcb%3Bgrowth_free-product_confirmation_modal%3Ahide_fp_confirmation_modal%3Bgrowth-tech_free-product_career_planning_tool%3Ashow_roadmap_output_page%3Bgrowth_free-product_show_calendar_invite%3Afp_hide_calendar_invite%3Bgrowth_free-product_show_live_class_nudge%3Afp_show_live_nudge_class%3Bgrowth_free-product_placement_banner_rcb%3Ashow_placement_banner_rcb%3Bgrowth_free-product_placement_banner_exit-intent%3Ashow_placement_banner_exit_intent%3Breferrals_free-product_self-apply-coupon%3Ashow_coupon_widget%3Bgrowth-tech_free-product_curriculum_skill_section%3Ashow_skills_section%3Bgrowth-tech_free-product_add_to_calendar%3Ashow_add_to_calendar%3Bgrowth-tech_free-product_scaler_benefit%3Ahide_scaler_benefit%3Bgrowth-tech_free-product_why_ai_banner%3Adefault_why_ai_banner%3Bgrowth-tech_paid-product_happy_flows_post_generator%3Ashow_happy_flows_post_generator%3Bgrowth-tech_free-product_exit_intent%3Ashow_resume_discussion_exit_intent%3Bgrowth-tech_free-product_voice_agent%3Ahide_fp_voice_agent%3Bgrowth-tech_paid-product_happy_flow_double_rewards_banner%3Ahide_happy_flow_double_rewards_banner%3Bgrowth-tech_free-product_cleanup%3Ashow_cleaned_up_free_product%3Breferrals-tech_friends-details-modal%3Ahide_friends_details_modal%3Bgrowth-tech_free-product_fp-onboarding-rcb%3Ahide_onboarding_first_fold_rcb%3Bgrowth-tech_free-product_crt_output%3Acrt_default_redirection%3Bgrowth-tech_lp-header_sign-up%3Ahide_signup_header%3Bgrowth-tech_lp-revamp_page-theme%3Adark%3Bgrowth-tech_lp-revamp_blc-first-fold%3Alp_revamp_form_first_v2%3Bgrowth-tech_rcb-modal-banner%3Ashow_banner_v1%3Bgrowth-tech_ai-mock-interview-banner%3Ashow_ai_mock_interview_banner%3Bgrowth-tech_lp-scaler-usp%3Ahide_scaler_usp%3Bgrowth-tech_rcb-sticky-form-v1%3Ahide_sticky_form_v1%3Bgrowth-tech_lp-online-pgp-touchpoints%3Ashow_online_pgp%3Bgrowth-tech_lp-sticky-rcb-button%3Ashow_sticky_rcb_button%3B; bypass_utm=utm_medium%3Ddirect%26utm_source%3Dnone%26utm_content%3D%2Fusers%2Fsign_in%2F; _clck=7mbebz%5E2%5Eg1x%5E0%5E2177; _clsk=ocheio%5E1765968625430%5E5%5E1%5Ej.clarity.ms%2Fcollect; _gcl_au=1.1.276073035.1765968579; _ga=GA1.1.145359995.1765968580; FPAU=1.1.276073035.1765968579; FPGSID=1.1765968579.1765968579.G-53S71ZZG1X.CsnLKeisw4tDtKDeIYciDw; funl_visitor_id=e0b96fec-e41e-4469-86a3-3bb71042144e; funl_session_id=0b176c7b-0cce-4afb-b7d0-2f1966fbeaa5; funl_last_activity=1765968607; _fbp=fb.1.1765968581450.201922893445513512; auth_session_id=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3VzLmFjY291bnRzLnNjYWxlci5jb20iLCJhdWQiOiJzY2FsZXIiLCJzdWIiOiJzY2FsZXIjdXNlciM3NTA0NzUxIiwic2Vzc2lvbl9pZCI6InNlc3Npb24jYWN0aXZlIzM2eUFudVBEQllpbkJLUUZScVpEdzkyNG92aCIsImlhdCI6MTc2NTk2ODYwNywic2Vzc2lvbl9zb3VyY2UiOiJzZWNvbmRhcnkiLCJleHAiOjE3Njg1NjA2MDd9.K-No77mcfaS4ghgTAzUaI-QKlWfPgGrUoPTn3REr8-4; auth_session_role=sst_user; lp_revamp_theme=dark; user_analytics_identifier=tVlBwF%2FWBhiP%2FZ8dTbv%2Bj6%2FZbkCHX7pWe1IqTvpId5k%3D%0A; _scaler_slug=833e16d753d1; _hjSessionUser_2240930=eyJpZCI6ImQwMGY0MTUxLTFhMjQtNWZmMi04NzUxLWNlYTQzMTVjYzliOSIsImNyZWF0ZWQiOjE3NjU5Njg2MTgxNTgsImV4aXN0aW5nIjpmYWxzZX0=; _hjSession_2240930=eyJpZCI6ImNkOGJjNzNhLWJmOTMtNDgyMy1iYmYyLTI1NGEwN2RhN2IxNiIsImMiOjE3NjU5Njg2MTgxNTgsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjoxLCJzcCI6MH0=; _uetsid=170c7480db3611f09c82658210a2d92a; _uetvid=170c7540db3611f087121dc1469bfa7b; mp_617cf6068be845deb36bb822c5ba2ad7_mixpanel=%7B%22distinct_id%22%3A%22tVlBwF%2FWBhiP%2FZ8dTbv%2Bj6%2FZbkCHX7pWe1IqTvpId5k%3D%5Cn%22%2C%22%24device_id%22%3A%2274e90427-7225-4a3e-884d-450a89c4870d%22%2C%22%24initial_referrer%22%3A%22https%3A%2F%2Fwww.scaler.com%2F%22%2C%22%24initial_referring_domain%22%3A%22www.scaler.com%22%2C%22__mps%22%3A%7B%7D%2C%22__mpso%22%3A%7B%7D%2C%22__mpus%22%3A%7B%7D%2C%22__mpa%22%3A%7B%7D%2C%22__mpu%22%3A%7B%7D%2C%22__mpr%22%3A%5B%5D%2C%22__mpap%22%3A%5B%5D%2C%22%24user_id%22%3A%22tVlBwF%2FWBhiP%2FZ8dTbv%2Bj6%2FZbkCHX7pWe1IqTvpId5k%3D%5Cn%22%7D; access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTVmODk5Ny0zYTNlLTQ4M2ItODI4MS1jOTIyYjdjZTA0MTEiLCJlbWFpbCI6InYuMjViY3MxMDA1M0Bzc3Quc2NhbGVyLmNvbSIsImF1ZCI6ImZhc3RhcGktdXNlcnM6YXV0aCIsImV4cCI6MTc2NjU3MzQyNCwiaWF0IjoxNzY1OTY4NjI0LCJqdGkiOiI2YWJmYjhjYTYzZjk4OGVlIn0.EqJZ4e4kG6RPUrXFn47ZYh2UDdvha1GZyO1UWYTZQ7M; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTVmODk5Ny0zYTNlLTQ4M2ItODI4MS1jOTIyYjdjZTA0MTEiLCJlbWFpbCI6InYuMjViY3MxMDA1M0Bzc3Quc2NhbGVyLmNvbSIsImF1ZCI6ImZhc3RhcGktdXNlcnM6YXV0aCIsImV4cCI6MTc2NjU3MzQyNCwiaWF0IjoxNzY1OTY4NjI0LCJqdGkiOiJhM2JkZTA1NzdjYzZmNmExIn0.OQT4rhOGqrmnzVcoOqE6QjxX3spMOdQn-j7ZpldJgl4; mp_d03190ebd99fb449512f78cabf9a14f5_mixpanel=%7B%22distinct_id%22%3A%20%227504751%22%2C%22%24device_id%22%3A%20%22b1183ac1-5554-4587-8a38-b604317bc65f%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Faccounts.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22accounts.google.com%22%2C%22__mps%22%3A%20%7B%7D%2C%22__mpso%22%3A%20%7B%7D%2C%22__mpus%22%3A%20%7B%7D%2C%22__mpa%22%3A%20%7B%7D%2C%22__mpu%22%3A%20%7B%7D%2C%22__mpr%22%3A%20%5B%5D%2C%22__mpap%22%3A%20%5B%5D%2C%22%24user_id%22%3A%20%227504751%22%2C%22ab_experiments%22%3A%20%7B%22growth-tech_free-product_fp-rcb%22%3A%20%22default_rcb%22%2C%22growth_free-product_confirmation_modal%22%3A%20%22hide_fp_confirmation_modal%22%2C%22growth-tech_free-product_career_planning_tool%22%3A%20%22show_roadmap_output_page%22%2C%22growth_free-product_show_calendar_invite%22%3A%20%22fp_hide_calendar_invite%22%2C%22growth_free-product_show_live_class_nudge%22%3A%20%22fp_show_live_nudge_class%22%2C%22growth_free-product_placement_banner_rcb%22%3A%20%22show_placement_banner_rcb%22%2C%22growth_free-product_placement_banner_exit-intent%22%3A%20%22show_placement_banner_exit_intent%22%2C%22referrals_free-product_self-apply-coupon%22%3A%20%22show_coupon_widget%22%2C%22growth-tech_free-product_curriculum_skill_section%22%3A%20%22show_skills_section%22%2C%22growth-tech_free-product_add_to_calendar%22%3A%20%22show_add_to_calendar%22%2C%22growth-tech_free-product_scaler_benefit%22%3A%20%22hide_scaler_benefit%22%2C%22growth-tech_free-product_why_ai_banner%22%3A%20%22default_why_ai_banner%22%2C%22growth-tech_paid-product_happy_flows_post_generator%22%3A%20%22show_happy_flows_post_generator%22%2C%22growth-tech_free-product_exit_intent%22%3A%20%22show_resume_discussion_exit_intent%22%2C%22growth-tech_free-product_voice_agent%22%3A%20%22hide_fp_voice_agent%22%2C%22growth-tech_paid-product_happy_flow_double_rewards_banner%22%3A%20%22hide_happy_flow_double_rewards_banner%22%2C%22growth-tech_free-product_cleanup%22%3A%20%22show_cleaned_up_free_product%22%2C%22referrals-tech_friends-details-modal%22%3A%20%22hide_friends_details_modal%22%2C%22growth-tech_free-product_fp-onboarding-rcb%22%3A%20%22hide_onboarding_first_fold_rcb%22%2C%22growth-tech_free-product_crt_output%22%3A%20%22crt_default_redirection%22%7D%7D' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Priority: u=4' \
+  -H 'TE: trailers'
+
+to get cname and token do tokens:video_broadcasting: , data:feedback_forums:0:item_id
+https://www.scaler.com/meetings/inner-products-angles-orthogonality-2/live-session
+
+
+to get latest class:
+https://www.scaler.com/academy/mentee/events
+topCardEvent:meeting-slug,
+topCardEvent:sbat_id,   --> gives class id 
