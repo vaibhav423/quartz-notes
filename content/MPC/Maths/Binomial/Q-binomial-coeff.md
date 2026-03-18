@@ -31,9 +31,7 @@ $$
 \alpha=\sum_\limits{k=0}^n\left(\frac{\left({ }^n C_k\right)^2}{k+1}\right)
 $$ 
 and 
-$$
-\beta=\sum_\limits{k=0}^{n-1}\left(\frac{{ }^n C_k{ }^n C_{k+1}}{k+2}\right)
-$$ 
+$\beta=\sum_\limits{k=0}^{n-1}\left(\frac{{ }^n C_k{ }^n C_{k+1}}{k+2}\right)$ 
 
 If $5 \alpha=6 \beta$, then $n$ equals _______.
 
